@@ -20,16 +20,22 @@
                 <p>لطفا اطلاعات مشتری را وارد نمایید.</p>
                 <br>
                 <form action="CreateLegalCustomerServlet">
-                    نام شرکت : <input type="text" name="companyName">
-                    <br>
-                    تاریخ ثبت : <input type="text" name="dateOfRegistration">
-                    <br>
-                    کد اقتصادی : <input type="text" name="economicCode"> *کد اقتصادی باید کدی غیر تکراری باشد
-                    <br>
-                    <input type="submit" class="button" value="ثبت اطلاعات" align="center">
-                </form>
-                <form action="index.html" class="form">
-                    <input type="submit" class="button" value="بازگشت به صفحه قبل">
+                    <table>
+                        <tr>
+                            <td> نام شرکت </td>
+                            <td><input type="text" name="companyName"></td>
+                        </tr>
+                        <tr>
+                            <td> تاریخ ثبت</td>
+                            <td><input type="text" name="dateOfRegistration"></td>
+                        </tr>
+                        <tr>
+                            <td>کد اقتصادی</td>
+                            <td><input type="text" name="economicCode"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" class="button" value="ثبت اطلاعات">
+                    <a href="legalCustomerManagement.html" class="form">بازگشت به صفحه قبل</a>
                 </form>
             </div>
             <div class="box-bottom"></div>

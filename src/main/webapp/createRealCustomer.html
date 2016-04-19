@@ -20,22 +20,31 @@
                 <p>لطفا اطلاعات مشتری را وارد نمایید.</p>
                 <br>
                 <form action="CreateRealCustomerServlet">
-                    نام: <input type="text" name="firstName">
-                    <br>
-                    نام خانوادگی : <input type="text" name="lastName">
-                    <br>
-                    نام پدر : <input type="text" name="fatherName">
-                    <br>
-                    تاریخ تولد : <input type="text" name="dateOfBirth">
-                    <br>
-                    کد ملی : <input type="text" name="nationalCode"> *کد ملی 10 رقمی و غیر تکراری وارد شود
-                    <br>
-                    <input type="submit" class="button" value="ثبت اطلاعات" align="center">
+                    <table>
+                        <tr>
+                            <td> نام </td>
+                            <td><input type="text" name="firstName"></td>
+                        </tr>
+                        <tr>
+                            <td> نام خانوادگی</td>
+                            <td><input type="text" name="lastName"></td>
+                        </tr>
+                        <tr>
+                            <td>نام پدر</td>
+                            <td><input type="text" name="fatherName"></td>
+                        </tr>
+                        <tr>
+                        <td>تاریخ تولد</td>
+                        <td><input type="text" name="dateOfBirth"></td>
+                        </tr>
+                        <tr>
+                        <td>کد ملی</td>
+                        <td><input type="text" name="nationalCode"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" class="button" value="ثبت اطلاعات">
+                    <a href="index.html" class="form">بازگشت به صفحه قبل</a>
                 </form>
-                <form action="index.html" class="form">
-                    <input type="submit" class="button" value="بازگشت به صفحه قبل">
-                </form>
-
             </div>
             <div class="box-bottom"></div>
         </div>
