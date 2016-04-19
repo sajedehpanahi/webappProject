@@ -19,23 +19,31 @@
                 <br>
                 <p>لطفا اطلاعات مشتری را وارد نمایید.</p>
                 <br>
-                <form action="CreateLegalCustomerServlet">
+                <form action="CreateRealCustomerServlet">
                     <table>
                         <tr>
-                            <td> نام شرکت </td>
-                            <td><input type="text" name="companyName"></td>
+                            <td> نام </td>
+                            <td><input type="text" name="firstName"></td>
                         </tr>
                         <tr>
-                            <td> تاریخ ثبت</td>
-                            <td><input type="text" name="dateOfRegistration"></td>
+                            <td> نام خانوادگی</td>
+                            <td><input type="text" name="lastName"></td>
                         </tr>
                         <tr>
-                            <td>کد اقتصادی</td>
-                            <td><input type="text" name="economicCode"></td>
+                            <td>نام پدر</td>
+                            <td><input type="text" name="fatherName"></td>
+                        </tr>
+                        <tr>
+                        <td>تاریخ تولد</td>
+                        <td><input type="text" name="dateOfBirth"></td>
+                        </tr>
+                        <tr>
+                        <td>کد ملی</td>
+                        <td><input type="text" name="nationalCode"></td>
                         </tr>
                     </table>
                     <input type="submit" class="button" value="ثبت اطلاعات">
-                    <a href="legalCustomerManagement.html" class="form">بازگشت به صفحه قبل</a>
+                    <a href="real-customer-management.html" class="form">بازگشت به صفحه قبل</a>
                 </form>
             </div>
             <div class="box-bottom"></div>

@@ -17,6 +17,14 @@
     <servlet-name>CreateLegalCustomerServlet</servlet-name>
     <servlet-class>com.servlets.CreateLegalCustomerServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>SearchRealCustomer</servlet-name>
+    <servlet-class>com.servlets.SearchRealCustomer</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SearchLegalCustomer</servlet-name>
+    <servlet-class>com.servlets.SearchLegalCustomer</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
@@ -29,6 +37,14 @@
   <servlet-mapping>
     <servlet-name>CreateLegalCustomerServlet</servlet-name>
     <url-pattern>/CreateLegalCustomerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchRealCustomer</servlet-name>
+    <url-pattern>/SearchRealCustomer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SearchLegalCustomer</servlet-name>
+    <url-pattern>/SearchLegalCustomer</url-pattern>
   </servlet-mapping>
 
 </web-app>
