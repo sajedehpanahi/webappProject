@@ -158,8 +158,7 @@ ul.main-list li{
 .button
 {
     background-color: #008080;
-    border:solid;
-    border-color: #008080;
+    border: solid #008080;
     color: white;
     padding: 15px 20px;
     margin: 10px 10px;

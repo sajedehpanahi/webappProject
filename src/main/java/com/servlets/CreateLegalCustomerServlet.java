@@ -1,5 +1,8 @@
 package com.servlets;
 
+import com.exceptions.FieldIsRequiredException;
+import com.logicLayer.CustomerValidator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,19 +24,21 @@ public class CreateLegalCustomerServlet extends HttpServlet {
         String companyName = request.getParameter("companyName");
         String dateOfRegistration = request.getParameter("dateOfRegistration");
         String economicCode = request.getParameter("economicCode");
+        String outputHTML="";
 
-        PrintWriter printWriter = response.getWriter();
-        printWriter.println("<html>\n" +
-                "<head>\n" +
-                "<title>Servlet Example</title>\n" +
-                "</head>\n" +
-                "<body>\n" +
-                "<h1>Real Customer Information!</h1>\n" +
-                "<h2>" + companyName + "</h2>\n" +
-                "<h2>" + dateOfRegistration + "</h2>\n" +
-                "<h2>" + economicCode + "</h2>\n" +
-                "</body>\n" +
-                "</html>");
+        OutPutGenerator outPutGenerator = new OutPutGenerator();
+        try {
+            CustomerValidator customerValidator = new CustomerValidator();
+            String customerNumber = customerValidator.validateAndCreate(companyName, dateOfRegistration, economicCode);
+            outputHTML =outPutGenerator.generate(companyName, dateOfRegistration, economicCode,customerNumber);
+        }catch (FieldIsRequiredException e){
+            outputHTML = outPutGenerator.generate(e.getMessage());
+        }
+        //TODO add another catch statement for repetitive economicCode
+
+        response.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        out.println(outputHTML);
 
     }
 

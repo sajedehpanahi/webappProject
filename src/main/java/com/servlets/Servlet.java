@@ -1,5 +1,7 @@
 package com.servlets;
 
+import com.logicLayer.CustomerValidator;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,8 +37,9 @@ public class Servlet extends HttpServlet {
                 "<h6>This is heading 6</h6>\n" +
                 "</body>\n" +
                 "</html>");
-       // printWriter.println("hello from servlet");
-
 
     }
+
+
+
 }
