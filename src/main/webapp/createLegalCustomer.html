@@ -19,18 +19,17 @@
                 <br>
                 <p>لطفا اطلاعات مشتری را وارد نمایید.</p>
                 <br>
-                <form action="CreateRealCustomerServlet">
-                    نام: <input type="text" name="firstName">
+                <form action="CreateLegalCustomerServlet">
+                    نام شرکت : <input type="text" name="companyName">
                     <br>
-                    نام خانوادگی : <input type="text" name="lastName">
+                    تاریخ ثبت : <input type="text" name="dateOfRegistration">
                     <br>
-                    نام پدر : <input type="text" name="fatherName">
-                    <br>
-                    تاریخ تولد : <input type="text" name="dateOfBirth">
-                    <br>
-                    کد ملی : <input type="text" name="nationalCode"> *کد ملی 10 رقمی و غیر تکراری وارد شود
+                    کد اقتصادی : <input type="text" name="economicCode"> *کد اقتصادی باید کدی غیر تکراری باشد
                     <br>
                     <input type="submit" class="button" value="ثبت اطلاعات" align="center">
+                </form>
+                <form action="index.html" class="form">
+                    <input type="submit" class="button" value="بازگشت به صفحه قبل">
                 </form>
             </div>
             <div class="box-bottom"></div>

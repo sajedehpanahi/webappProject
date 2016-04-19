@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "CreateRealCustomerServlet")
-public class CreateRealCustomerServlet extends HttpServlet {
+@WebServlet(name = "CreateLegalCustomerServlet")
+public class CreateLegalCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -18,11 +18,9 @@ public class CreateRealCustomerServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String fatherName = request.getParameter("fatherName");
-        String dateOfBirth = request.getParameter("dateOfBirth");
-        String nationalCode = request.getParameter("nationalCode");
+        String companyName = request.getParameter("companyName");
+        String dateOfRegistration = request.getParameter("dateOfRegistration");
+        String economicCode = request.getParameter("economicCode");
 
         PrintWriter printWriter = response.getWriter();
         printWriter.println("<html>\n" +
@@ -31,13 +29,12 @@ public class CreateRealCustomerServlet extends HttpServlet {
                 "</head>\n" +
                 "<body>\n" +
                 "<h1>Real Customer Information!</h1>\n" +
-                "<h2>"+firstName+"</h2>\n" +
-                "<h2>"+lastName+"</h2>\n" +
-                "<h2>"+fatherName+"</h2>\n" +
-                "<h2>"+dateOfBirth+"</h2>\n" +
-                "<h2>"+nationalCode+"</h2>\n" +
+                "<h2>" + companyName + "</h2>\n" +
+                "<h2>" + dateOfRegistration + "</h2>\n" +
+                "<h2>" + economicCode + "</h2>\n" +
                 "</body>\n" +
                 "</html>");
 
     }
+
 }

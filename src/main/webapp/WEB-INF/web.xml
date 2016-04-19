@@ -9,20 +9,26 @@
     <servlet-name>Servlet</servlet-name>
     <servlet-class>com.servlets.Servlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CreateRealCustomerServlet</servlet-name>
+    <servlet-class>com.servlets.CreateRealCustomerServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>CreateLegalCustomerServlet</servlet-name>
+    <servlet-class>com.servlets.CreateLegalCustomerServlet</servlet-class>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>Servlet</servlet-name>
     <url-pattern>/Servlet</url-pattern>
   </servlet-mapping>
-
-  <servlet>
-    <servlet-name>CreateRealCustomerServlet</servlet-name>
-    <servlet-class>com.servlets.CreateRealCustomerServlet</servlet-class>
-  </servlet>
-
   <servlet-mapping>
     <servlet-name>CreateRealCustomerServlet</servlet-name>
     <url-pattern>/CreateRealCustomerServlet</url-pattern>
   </servlet-mapping>
-  
+  <servlet-mapping>
+    <servlet-name>CreateLegalCustomerServlet</servlet-name>
+    <url-pattern>/CreateLegalCustomerServlet</url-pattern>
+  </servlet-mapping>
+
 </web-app>
