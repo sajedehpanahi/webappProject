@@ -1,5 +1,6 @@
 package com.logicLayer;
 
+import com.dataAccessLayer.CustomerCRUD;
 import com.exceptions.FieldIsRequiredException;
 
 public class CustomerValidator {
@@ -10,27 +11,19 @@ public class CustomerValidator {
         RealCustomerValidator realCustomerValidator = new RealCustomerValidator();
         realCustomerValidator.validate(firstName.trim(),lastName.trim(),fatherName.trim(),dateOfBirth.trim(),nationalCode.trim());
 
-        //TODO create customer and insert to data base using customerCRUD.Create method
-
-        //customerNumber comes from customerCrud method
-        String customerNumber="customerNumber";
-
-        return customerNumber;
-
+        //TODO need to throw some exceptions
+        CustomerCRUD customerCRUD = new CustomerCRUD();
+        return  customerCRUD.create(firstName,lastName,fatherName,dateOfBirth,nationalCode);
     }
 
-    public String validateAndCreate(String companyName, String dateOfRegistration, String economicCode) throws FieldIsRequiredException {
+    public String validateAndCreate(String companyName, String dateOfRegistration, String economicCode)
+            throws FieldIsRequiredException {
 
         LegalCustomerValidator legalCustomerValidator = new LegalCustomerValidator();
         legalCustomerValidator.validate(companyName.trim(),dateOfRegistration.trim(),economicCode.trim());
 
-
-        //TODO  insert customer to data base using customerCRUD.Create method
-
-        //customerNumber comes from customerCrud method
-        String customerNumber="customerNumber";
-
-        return customerNumber;
-
+        //TODO need to throw some exceptions
+        CustomerCRUD customerCRUD = new CustomerCRUD();
+        return  customerCRUD.create(companyName,dateOfRegistration,economicCode);
     }
 }
