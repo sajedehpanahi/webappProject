@@ -19,9 +19,39 @@
       <artifactId>javax.servlet-api</artifactId>
       <version>3.1.0</version>
     </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.37</version>
+    </dependency>
 
   </dependencies>
   <build>
-    <finalName>webapp</finalName>
+      <plugins>
+          <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-compiler-plugin</artifactId>
+              <configuration>
+                  <source>1.8</source>
+                  <target>1.8</target>
+              </configuration>
+          </plugin>
+
+          <plugin>
+          <groupId>org.eclipse.jetty</groupId>
+          <artifactId>jetty-maven-plugin</artifactId>
+          <version>9.2.11.v20150529</version>
+          <configuration>
+              <scanIntervalSeconds>10</scanIntervalSeconds>
+              <webApp>
+                  <contextPath>/</contextPath>
+              </webApp>
+              <httpConnector>
+                  <port>8888</port>
+              </httpConnector>
+          </configuration>
+      </plugin>
+      </plugins>
+    <!--<finalName>webapp</finalName>-->
   </build>
 </project>

@@ -1,8 +1,11 @@
-package com.servlets;
+package com.util;
+
+import com.dataAccessLayer.LegalCustomer;
+import com.dataAccessLayer.RealCustomer;
 
 public class OutPutGenerator {
 
-    public String generate(String exception){
+    public static String generate(String exception){
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<!DOCTYPE html>");
         stringBuilder.append("<html lang=fa>");
@@ -36,7 +39,7 @@ public class OutPutGenerator {
         return  stringBuilder.toString();
     }
 
-    public String generate(String companyName, String dateOfRegistration, String economicCode,String customerNumber){
+    public static String generate(LegalCustomer legalCustomer){
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<!DOCTYPE html>");
@@ -61,19 +64,19 @@ public class OutPutGenerator {
         stringBuilder.append("                    <table>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td> نام شرکت </td>");
-        stringBuilder.append("                            <td>"+companyName+"</td>");
+        stringBuilder.append("                            <td>"+legalCustomer.getCompanyName()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td> تاریخ ثبت</td>");
-        stringBuilder.append("                            <td>"+dateOfRegistration+"</td>");
+        stringBuilder.append("                            <td>"+legalCustomer.getDateOfRegistration()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td>کد اقتصادی</td>");
-        stringBuilder.append("                            <td>"+economicCode+"</td>");
+        stringBuilder.append("                            <td>"+legalCustomer.getEconomicCode()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td>شماره مشتری</td>");
-        stringBuilder.append("                            <td>"+customerNumber+"</td>");
+        stringBuilder.append("                            <td>"+legalCustomer.getCustomerNumber()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                    </table>");
         stringBuilder.append("                    <a href=legal-customer-management.html class=form>بازگشت به صفحه قبل</a>");
@@ -90,7 +93,7 @@ public class OutPutGenerator {
         return stringBuilder.toString();
     }
 
-    public String generate(String firstName,String lastName, String fatherName, String dateOfBirth, String nationalCode, String customerNumber){
+    public static String generate(RealCustomer realCustomer){
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("<!DOCTYPE html>");
@@ -115,27 +118,27 @@ public class OutPutGenerator {
         stringBuilder.append("                    <table>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td> نام </td>");
-        stringBuilder.append("                            <td>"+firstName+"</td>");
+        stringBuilder.append("                            <td>"+realCustomer.getFirstName()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td> نام خانوادگی</td>");
-        stringBuilder.append("                            <td>"+lastName+"</td>");
+        stringBuilder.append("                            <td>"+realCustomer.getLastName()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td>نام پدر</td>");
-        stringBuilder.append("                            <td>"+fatherName+"</td>");
+        stringBuilder.append("                            <td>"+realCustomer.getFatherName()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td>تاریخ تولد</td>");
-        stringBuilder.append("                            <td>"+dateOfBirth+"</td>");
+        stringBuilder.append("                            <td>"+realCustomer.getDateOfBirth()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td>کد ملی</td>");
-        stringBuilder.append("                            <td>"+nationalCode+"</td>");
+        stringBuilder.append("                            <td>"+realCustomer.getNationalCode()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                        <tr>");
         stringBuilder.append("                            <td>شماره مشتری</td>");
-        stringBuilder.append("                            <td>"+customerNumber+"</td>");
+        stringBuilder.append("                            <td>"+realCustomer.getCustomerNumber()+"</td>");
         stringBuilder.append("                        </tr>");
         stringBuilder.append("                    </table>");
         stringBuilder.append("                    <a href=legal-customer-management.html class=form>بازگشت به صفحه قبل</a>");

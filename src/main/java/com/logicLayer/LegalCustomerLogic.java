@@ -2,9 +2,9 @@ package com.logicLayer;
 
 import com.exceptions.FieldIsRequiredException;
 
-public class LegalCustomerValidator {
+public class LegalCustomerLogic {
 
-    public void validate(String companyName, String dateOfRegistration, String economicCode)
+    public static void validate(String companyName, String dateOfRegistration, String economicCode)
             throws FieldIsRequiredException {
 
         if(companyName == null) {

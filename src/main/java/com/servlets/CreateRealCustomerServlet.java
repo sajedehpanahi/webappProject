@@ -1,7 +1,11 @@
 package com.servlets;
 
+import com.dataAccessLayer.RealCustomer;
+import com.exceptions.AssignCustomerNumberException;
+import com.exceptions.DateFormatException;
 import com.exceptions.FieldIsRequiredException;
-import com.logicLayer.CustomerValidator;
+import com.logicLayer.CustomerLogic;
+import com.util.OutPutGenerator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "CreateRealCustomerServlet")
 public class CreateRealCustomerServlet extends HttpServlet {
@@ -28,16 +33,12 @@ public class CreateRealCustomerServlet extends HttpServlet {
         String nationalCode = request.getParameter("nationalCode");
         String outputHTML="";
 
-        OutPutGenerator outPutGenerator = new OutPutGenerator();
         try{
-            CustomerValidator customerValidator = new CustomerValidator();
-            String customerNumber = customerValidator.validateAndCreate(firstName,lastName,fatherName,dateOfBirth,nationalCode);
-            outputHTML = outPutGenerator.generate(firstName,lastName,fatherName,dateOfBirth,nationalCode,customerNumber);
-        } catch (FieldIsRequiredException e) {
-            outputHTML = outPutGenerator.generate(e.getMessage());
+            RealCustomer realCustomer = CustomerLogic.CreateCustomer(firstName,lastName,fatherName,dateOfBirth,nationalCode);
+            outputHTML = OutPutGenerator.generate(realCustomer);
+        } catch (FieldIsRequiredException | DateFormatException | AssignCustomerNumberException | SQLException e) {
+            outputHTML = OutPutGenerator.generate(e.getMessage());
         }
-        //TODO add another catch statement for repetitive nationalCode
-
 
         response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();

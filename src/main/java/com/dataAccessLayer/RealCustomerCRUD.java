@@ -1,21 +1,23 @@
 package com.dataAccessLayer;
 
-import java.sql.Connection;
+import com.util.SingletonConnection;
+
 import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+
 
 public class RealCustomerCRUD {
 
-    public void create(String firstName, String lastName, String fatherName, String dateOfBirth, String nationalCode, String customerNumber, Connection connection)
+    public static void create(RealCustomer realCustomer)
             throws SQLException {
-        DateFormat dateFormat = new SimpleDateFormat(dateOfBirth);
-        //Date date=dateFormat
-        Statement statement = connection.createStatement();
-        String query = "INSERT INTO legal_customer VALUES ("+ Integer.parseInt(nationalCode.trim())+",'"+firstName+"','"+lastName+"','"+fatherName+"','"+ "'123457','dotin','2014-01-01',@last_id)";
-        statement.executeUpdate(query);
-
+        PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("INSERT INTO real_customer VALUES ( ?, ?, ?, ?, ?, ?);");
+        preparedStatement.setInt(1, Integer.parseInt(realCustomer.getNationalCode()));
+        preparedStatement.setString(2, realCustomer.getFirstName());
+        preparedStatement.setString(3, realCustomer.getLastName());
+        preparedStatement.setString(4, realCustomer.getFatherName());
+        preparedStatement.setDate(5, Date.valueOf(realCustomer.getDateOfBirth()));
+        preparedStatement.setString(6, realCustomer.getCustomerNumber());
+        preparedStatement.executeUpdate();
     }
 }

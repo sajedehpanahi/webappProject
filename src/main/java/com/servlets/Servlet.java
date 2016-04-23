@@ -1,7 +1,5 @@
 package com.servlets;
 
-import com.logicLayer.CustomerValidator;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

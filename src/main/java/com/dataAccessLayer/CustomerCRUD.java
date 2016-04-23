@@ -1,61 +1,75 @@
 package com.dataAccessLayer;
 
+import com.exceptions.AssignCustomerNumberException;
+import com.mysql.jdbc.*;
+import com.util.SingletonConnection;
+
 import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class CustomerCRUD {
 
-    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private final String DB_URL = "jdbc:mysql://localhost/DATA_BANK";
-    private final String USER = "root";
-    private final String PASS = "root";
+    public static String create(RealCustomer realCustomer)
+            throws SQLException, AssignCustomerNumberException {
 
-    public String create(String firstName,String lastName, String fatherName, String dateOfBirth, String nationalCode){
-
-        Connection connection = null;
-        Statement statement = null;
         int customerNumber = 0;
+        try {
+            PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("INSERT INTO customer (customer_type) VALUES ('real')");
+            preparedStatement.executeUpdate();
 
-        try{
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
+            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("SET @last_id = LAST_INSERT_ID();");
+            preparedStatement.executeQuery();
 
-            String query = "INSERT INTO customer (customer_type) VALUES ('real')";
-            statement.executeUpdate(query);
+            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("SELECT @last_id");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            query = "SET @last_id = LAST_INSERT_ID();";
-            statement.executeQuery(query);
-
-            query = "SELECT @last_id";
-            ResultSet resultSet=statement.executeQuery(query);
-
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 customerNumber = resultSet.getInt(1);
             }
             resultSet.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if(customerNumber==0);
-            //TODO Throw exception
+        if (customerNumber != 0) {
+            realCustomer.setCustomerNumber(String.valueOf(customerNumber));
+        } else {
+            throw new AssignCustomerNumberException("خطا در تخصیص شماره مشتری! لطفا مجددا تلاش نمایید.");
+        }
 
-        //TODO add customer tp real customer using real customer CRUD
+        RealCustomerCRUD.create(realCustomer);
 
-        //return customerNumber
-
-        return "customerNumber";
+        return String.valueOf(customerNumber);
     }
 
-    public String create(String companyName, String dateOfRegistration, String economicCode){
+    public static String create(LegalCustomer legalCustomer) throws AssignCustomerNumberException, SQLException {
 
-        //TODO add customer to customer and get customerNumber
+        int customerNumber = 0;
+        try {
+            PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("INSERT INTO customer (customer_type) VALUES ('legal')");
+            preparedStatement.executeUpdate();
 
-        //TODO add customer tp legal customer using legal customer CRUD
+            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("SET @last_id = LAST_INSERT_ID();");
+            preparedStatement.executeQuery();
 
-        //return customerNumber
+            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("SELECT @last_id");
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-        return "customerNumber";
+            if (resultSet.next()) {
+                customerNumber = resultSet.getInt(1);
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if (customerNumber != 0) {
+            legalCustomer.setCustomerNumber(String.valueOf(customerNumber));
+        } else {
+            throw new AssignCustomerNumberException("خطا در تخصیص شماره مشتری! لطفا مجددا تلاش نمایید.");
+        }
+
+        LegalCustomerCRUD.create(legalCustomer);
+
+        return legalCustomer.getCustomerNumber();
     }
 }
