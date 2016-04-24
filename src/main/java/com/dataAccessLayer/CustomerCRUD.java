@@ -13,36 +13,33 @@ public class CustomerCRUD {
     public static String create(RealCustomer realCustomer)
             throws SQLException, AssignCustomerNumberException {
 
-        int customerNumber = 0;
+        String customerNumber = "";
         try {
-            PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("INSERT INTO customer (customer_type) VALUES ('real')");
-            preparedStatement.executeUpdate();
-
-            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("SET @last_id = LAST_INSERT_ID();");
-            preparedStatement.executeQuery();
-
-            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("SELECT @last_id");
-            ResultSet resultSet = preparedStatement.executeQuery();
-
+            PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("INSERT INTO customer () VALUES ();",Statement.RETURN_GENERATED_KEYS);
+            ResultSet resultSet = preparedStatement.getGeneratedKeys();
             if (resultSet.next()) {
-                customerNumber = resultSet.getInt(1);
+                customerNumber = String.valueOf(resultSet.getInt(1));
+                /*preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement("INSERT INTO customer (customer_number) VALUES (?)");
+                preparedStatement.setString(1,customerNumber);
+                preparedStatement.executeUpdate();*/
             }
             resultSet.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        if (customerNumber != 0) {
-            realCustomer.setCustomerNumber(String.valueOf(customerNumber));
+        if (customerNumber != "") {
+            realCustomer.setCustomerNumber(customerNumber);
         } else {
             throw new AssignCustomerNumberException("خطا در تخصیص شماره مشتری! لطفا مجددا تلاش نمایید.");
         }
 
         RealCustomerCRUD.create(realCustomer);
 
-        return String.valueOf(customerNumber);
+        return customerNumber;
     }
 
-    public static String create(LegalCustomer legalCustomer) throws AssignCustomerNumberException, SQLException {
+    public static String create(LegalCustomer legalCustomer)
+            throws AssignCustomerNumberException, SQLException {
 
         int customerNumber = 0;
         try {

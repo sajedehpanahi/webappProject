@@ -12,7 +12,7 @@ public class SingletonConnection {
     static {
         try {
             Class.forName(JDBC_DRIVER);
-            String DB_URL = "jdbc:mysql://localhost:3306/DATA_BANK?useSSL=false";
+            String DB_URL = "jdbc:mysql://localhost:3306/DATABASE2?useSSL=false";
             String USER = "root";
             String PASS = "root";
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
