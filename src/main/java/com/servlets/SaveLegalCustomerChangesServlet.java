@@ -1,9 +1,6 @@
 package com.servlets;
 
-import com.dataAccessLayer.Beans.LegalCustomer;
-import com.exceptions.AssignCustomerNumberException;
-import com.exceptions.DuplicateInformationException;
-import com.exceptions.FieldIsRequiredException;
+import com.exceptions.DataBaseConnectionException;
 import com.logicLayer.CustomerLogic;
 import com.util.OutputGenerator;
 
@@ -16,24 +13,21 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
-@WebServlet(name = "CreateLegalCustomerServlet")
-public class CreateLegalCustomerServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
+@WebServlet(name = "SaveLegalCustomerChangesServlet")
+public class SaveLegalCustomerChangesServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        int id = Integer.parseInt(request.getParameter("id"));
         String companyName = request.getParameter("companyName");
         String dateOfRegistration = request.getParameter("dateOfRegistration");
         String economicCode = request.getParameter("economicCode");
         String outputHTML="";
 
         try {
-            LegalCustomer legalCustomer = CustomerLogic.CreateCustomer(companyName, dateOfRegistration, economicCode);
-            outputHTML =OutputGenerator.generate(legalCustomer);
-        }catch (FieldIsRequiredException | AssignCustomerNumberException | SQLException | DuplicateInformationException e){
+            CustomerLogic.updateCustomer(id, companyName, dateOfRegistration, economicCode);
+            outputHTML = OutputGenerator.generateSuccess("اطلاعات مشتری با موفقیت اطلاح شد.");
+        } catch (SQLException | DataBaseConnectionException e){
             outputHTML = OutputGenerator.generate(e.getMessage());
         }
 
@@ -42,5 +36,4 @@ public class CreateLegalCustomerServlet extends HttpServlet {
         out.println(outputHTML);
 
     }
-
 }

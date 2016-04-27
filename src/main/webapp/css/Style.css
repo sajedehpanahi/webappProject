@@ -197,3 +197,20 @@ ul.main-list li{
     background-color:white;
     color: #008080;
 }
+
+.result-table
+{
+    width: 100%;
+}
+.result-table th
+{
+    height: 50px;
+    text-align: right;
+    vertical-align: middle;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+}
+.result-table td
+{
+    border-bottom: 1px solid #ddd;
+}

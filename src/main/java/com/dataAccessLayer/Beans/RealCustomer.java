@@ -1,11 +1,22 @@
-package com.dataAccessLayer;
+package com.dataAccessLayer.Beans;
+
+import com.dataAccessLayer.Beans.Customer;
 
 public class RealCustomer extends Customer {
+    private int id;
     private String firstName;
     private String lastName;
     private String fatherName;
     private String dateOfBirth;
     private String nationalCode;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getFirstName() {
         return firstName;

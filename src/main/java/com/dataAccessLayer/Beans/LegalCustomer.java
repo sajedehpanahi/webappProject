@@ -1,9 +1,20 @@
-package com.dataAccessLayer;
+package com.dataAccessLayer.Beans;
 
-public class LegalCustomer extends Customer{
+import com.dataAccessLayer.Beans.Customer;
+
+public class LegalCustomer extends Customer {
+    private int id;
     private String companyName;
     private String dateOfRegistration;
     private String economicCode;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCompanyName() {
         return companyName;

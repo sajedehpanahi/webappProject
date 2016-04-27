@@ -1,4 +1,4 @@
-package com.dataAccessLayer;
+package com.dataAccessLayer.Beans;
 
 public class Customer {
     private String customerNumber;

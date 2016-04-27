@@ -1,10 +1,6 @@
 package com.servlets;
 
 import com.dataAccessLayer.Beans.RealCustomer;
-import com.exceptions.AssignCustomerNumberException;
-import com.exceptions.DateFormatException;
-import com.exceptions.DuplicateInformationException;
-import com.exceptions.FieldIsRequiredException;
 import com.logicLayer.CustomerLogic;
 import com.util.OutputGenerator;
 
@@ -16,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-@WebServlet(name = "CreateRealCustomerServlet")
-public class CreateRealCustomerServlet extends HttpServlet {
+
+@WebServlet(name = "SearchRealCustomerServlet")
+public class SearchRealCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -26,18 +24,21 @@ public class CreateRealCustomerServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+        String customerNumber = request.getParameter("customer_number");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String fatherName = request.getParameter("fatherName");
         String dateOfBirth = request.getParameter("dateOfBirth");
         String nationalCode = request.getParameter("nationalCode");
-        String outputHTML = "";
-
+        String outputHTML="";
         try {
-            RealCustomer realCustomer = CustomerLogic.CreateCustomer(firstName, lastName, fatherName, dateOfBirth, nationalCode);
-            outputHTML = OutputGenerator.generate(realCustomer);
-        } catch (FieldIsRequiredException | DateFormatException | AssignCustomerNumberException | SQLException | DuplicateInformationException e) {
+            ArrayList<RealCustomer> realCustomers = CustomerLogic.retrieveCustomer(customerNumber, nationalCode, firstName,lastName,fatherName,dateOfBirth);
+            if(realCustomers.size() == 0){
+                outputHTML = OutputGenerator.generateSuccess("مشتری با اطلاعات وارد شده وجود ندارد.");
+            }else {
+                outputHTML = OutputGenerator.generateRealCustomerResults(realCustomers);
+            }
+        }catch (SQLException e){
             outputHTML = OutputGenerator.generate(e.getMessage());
         }
 

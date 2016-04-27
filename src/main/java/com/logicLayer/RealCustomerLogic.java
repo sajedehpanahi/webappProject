@@ -1,13 +1,14 @@
 package com.logicLayer;
 
 
-import com.dataAccessLayer.RealCustomer;
+import com.dataAccessLayer.Beans.RealCustomer;
+import com.dataAccessLayer.CustomerCRUD;
+import com.dataAccessLayer.RealCustomerCRUD;
+import com.exceptions.AssignCustomerNumberException;
 import com.exceptions.DateFormatException;
 import com.exceptions.FieldIsRequiredException;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.SQLException;
 
 public class RealCustomerLogic {
 
@@ -30,5 +31,20 @@ public class RealCustomerLogic {
         }
         //TODO check nationalCode on database! it must be unique! add national code exists exception!
 
+    }
+
+    public static void retrieveCustomer(){
+        //TODO validate new inputs
+    }
+
+    public static void deleteById(int id)
+            throws SQLException {
+        RealCustomer realCustomer = RealCustomerCRUD.retrieveCustomerById(id);
+        CustomerCRUD.deleteByCustomerNumber(realCustomer.getCustomerNumber());
+    }
+
+    public static RealCustomer retrieveCustomerById(int id)
+            throws SQLException {
+       return  RealCustomerCRUD.retrieveCustomerById(id);
     }
 }

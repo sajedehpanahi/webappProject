@@ -1,9 +1,6 @@
 package com.servlets;
 
 import com.dataAccessLayer.Beans.LegalCustomer;
-import com.exceptions.AssignCustomerNumberException;
-import com.exceptions.DuplicateInformationException;
-import com.exceptions.FieldIsRequiredException;
 import com.logicLayer.CustomerLogic;
 import com.util.OutputGenerator;
 
@@ -15,25 +12,30 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-@WebServlet(name = "CreateLegalCustomerServlet")
-public class CreateLegalCustomerServlet extends HttpServlet {
+@WebServlet(name = "SearchLegalCustomerServlet")
+public class SearchLegalCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String customerNumber = request.getParameter("customerNumber");
         String companyName = request.getParameter("companyName");
         String dateOfRegistration = request.getParameter("dateOfRegistration");
         String economicCode = request.getParameter("economicCode");
         String outputHTML="";
-
         try {
-            LegalCustomer legalCustomer = CustomerLogic.CreateCustomer(companyName, dateOfRegistration, economicCode);
-            outputHTML =OutputGenerator.generate(legalCustomer);
-        }catch (FieldIsRequiredException | AssignCustomerNumberException | SQLException | DuplicateInformationException e){
+            ArrayList<LegalCustomer> legalCustomers = CustomerLogic.retrieveCustomer(customerNumber, companyName, dateOfRegistration, economicCode);
+            if(legalCustomers.size() == 0){
+                outputHTML = OutputGenerator.generateSuccess("مشتری با اطلاعات وارد شده وجود ندارد.");
+            }else {
+                outputHTML = OutputGenerator.generateLegalCustomerResult(legalCustomers);
+            }
+        }catch (SQLException e){
             outputHTML = OutputGenerator.generate(e.getMessage());
         }
 
@@ -42,5 +44,4 @@ public class CreateLegalCustomerServlet extends HttpServlet {
         out.println(outputHTML);
 
     }
-
 }

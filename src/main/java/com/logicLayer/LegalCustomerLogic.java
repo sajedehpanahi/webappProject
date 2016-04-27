@@ -1,6 +1,10 @@
 package com.logicLayer;
 
+import com.dataAccessLayer.LegalCustomerCRUD;
+import com.exceptions.DataBaseConnectionException;
 import com.exceptions.FieldIsRequiredException;
+
+import java.sql.SQLException;
 
 public class LegalCustomerLogic {
 
@@ -18,5 +22,12 @@ public class LegalCustomerLogic {
         }
 
         //TODO check economicCode on database! it must be unique! add economic code exists exception!
+    }
+    public static void retrieveCustomer(){
+        //TODO validate new inputs
+    }
+    public static void deleteById(int id)
+            throws SQLException, DataBaseConnectionException {
+        LegalCustomerCRUD.deleteById(id);
     }
 }
