@@ -26,6 +26,10 @@
         <servlet-class>com.servlets.DeleteLegalCustomerServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DeleteRealCustomerServlet</servlet-name>
+        <servlet-class>com.servlets.DeleteRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>UpdateLegalCustomerServlet</servlet-name>
         <servlet-class>com.servlets.UpdateLegalCustomerServlet</servlet-class>
     </servlet>
@@ -61,6 +65,10 @@
     <servlet-mapping>
         <servlet-name>DeleteLegalCustomerServlet</servlet-name>
         <url-pattern>/DeleteLegalCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteRealCustomerServlet</servlet-name>
+        <url-pattern>/DeleteRealCustomerServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateLegalCustomerServlet</servlet-name>

@@ -15,9 +15,6 @@ import java.sql.SQLException;
 
 @WebServlet(name = "UpdateLegalCustomerServlet")
 public class UpdateLegalCustomerServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

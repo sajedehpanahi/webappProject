@@ -28,7 +28,7 @@ public class SaveRealCustomerChangesServlet extends HttpServlet {
 
         try {
             CustomerLogic.updateCustomer(id, nationalCode, firstName, lastName, fatherName, dateOfBirth);
-            outputHTML = OutputGenerator.generateSuccess("اطلاعات مشتری با موفقیت اطلاح شد.");
+            outputHTML = OutputGenerator.generateSuccess("اطلاعات مشتری با موفقیت اطلاح شد.","real");
         } catch (DataBaseConnectionException e){
             outputHTML = OutputGenerator.generate(e.getMessage());
         }

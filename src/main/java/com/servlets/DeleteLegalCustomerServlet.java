@@ -27,7 +27,7 @@ public class DeleteLegalCustomerServlet extends HttpServlet {
         String outputHTML = "";
         try {
             LegalCustomerLogic.deleteById(id);
-            outputHTML = OutputGenerator.generateSuccess("مشتری با موفقیت حذف شد.");
+            outputHTML = OutputGenerator.generateSuccess("مشتری با موفقیت حذف شد.","legal");
         } catch (SQLException e) {
             outputHTML = OutputGenerator.generate(e.getMessage());
         } catch (DataBaseConnectionException e) {

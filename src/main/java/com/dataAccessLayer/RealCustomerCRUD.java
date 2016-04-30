@@ -21,7 +21,7 @@ public class RealCustomerCRUD {
                         "INSERT INTO real_customer(customer_number, national_code, first_name, last_name, father_name, date_of_birth)" +
                                 " VALUES ( ?, ?, ?, ?, ?, ?);");) {
             preparedStatement.setString(1, realCustomer.getCustomerNumber());
-            preparedStatement.setInt(2, Integer.parseInt(realCustomer.getNationalCode()));
+            preparedStatement.setString(2, realCustomer.getNationalCode());
             preparedStatement.setString(3, realCustomer.getFirstName());
             preparedStatement.setString(4, realCustomer.getLastName());
             preparedStatement.setString(5, realCustomer.getFatherName());
@@ -34,7 +34,6 @@ public class RealCustomerCRUD {
 
     static ArrayList<RealCustomer> retrieve(String customerNumber, String nationalCode, String firstName, String lastName, String fatherName, String dateOfBirth) {
         ArrayList<RealCustomer> realCustomers = new ArrayList<RealCustomer>();
-        //generatePreparedStatement("custoemrnumber","1425630","aaa","","سسس");
         try (PreparedStatement preparedStatement = generatePreparedStatement(customerNumber,nationalCode,firstName,lastName,fatherName);) {
             ResultSet results = preparedStatement.executeQuery();
             while (results.next()) {
@@ -77,13 +76,14 @@ public class RealCustomerCRUD {
     public static void update(int id, String nationalCode, String firstName, String lastName, String fatherName, String dateOfBirth)
             throws DataBaseConnectionException {
         try (PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection()
-                .prepareStatement("UPDATE real_customer SET first_name = ? , lastName =  ? ,  fatherName = ?  ,  nationalCode = ?  ,  dateOfBirth = ?  WHERE id=?");) {
+                .prepareStatement("UPDATE real_customer SET first_name = ? , last_name =  ? ,  father_name = ?  ,  national_code = ?  ,  date_of_birth = ?  WHERE id=?");) {
             preparedStatement.setString(1, firstName);
             preparedStatement.setString(2, lastName);
             preparedStatement.setString(3, fatherName);
             preparedStatement.setString(4, nationalCode);
             preparedStatement.setDate(5, Date.valueOf(dateOfBirth));
             preparedStatement.setInt(6, id);
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             throw new DataBaseConnectionException(e.getMessage() + "خطا در به روز رسانی اطلاعات پایگاه داده!");
         }

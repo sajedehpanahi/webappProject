@@ -25,7 +25,7 @@ public class DeleteRealCustomerServlet extends HttpServlet {
         String outputHTML = "";
         try {
             RealCustomerLogic.deleteById(id);
-            outputHTML = OutputGenerator.generateSuccess("مشتری با موفقیت حذف شد.");
+            outputHTML = OutputGenerator.generateSuccess("مشتری با موفقیت حذف شد.","real");
         } catch (SQLException e) {
             outputHTML = OutputGenerator.generate(e.getMessage());
         }

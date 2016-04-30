@@ -31,7 +31,7 @@ public class SearchLegalCustomerServlet extends HttpServlet {
         try {
             ArrayList<LegalCustomer> legalCustomers = CustomerLogic.retrieveCustomer(customerNumber, companyName, dateOfRegistration, economicCode);
             if(legalCustomers.size() == 0){
-                outputHTML = OutputGenerator.generateSuccess("مشتری با اطلاعات وارد شده وجود ندارد.");
+                outputHTML = OutputGenerator.generateSuccess("مشتری با اطلاعات وارد شده وجود ندارد.", "legal");
             }else {
                 outputHTML = OutputGenerator.generateLegalCustomerResult(legalCustomers);
             }

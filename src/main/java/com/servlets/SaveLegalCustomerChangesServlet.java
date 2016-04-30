@@ -26,7 +26,7 @@ public class SaveLegalCustomerChangesServlet extends HttpServlet {
 
         try {
             CustomerLogic.updateCustomer(id, companyName, dateOfRegistration, economicCode);
-            outputHTML = OutputGenerator.generateSuccess("اطلاعات مشتری با موفقیت اطلاح شد.");
+            outputHTML = OutputGenerator.generateSuccess("اطلاعات مشتری با موفقیت اطلاح شد.","legal");
         } catch (SQLException | DataBaseConnectionException e){
             outputHTML = OutputGenerator.generate(e.getMessage());
         }
