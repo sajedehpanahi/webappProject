@@ -30,8 +30,16 @@
         <servlet-class>com.servlets.UpdateLegalCustomerServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UpdateRealCustomerServlet</servlet-name>
+        <servlet-class>com.servlets.UpdateRealCustomerServlet</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>SaveLegalCustomerChangesServlet</servlet-name>
         <servlet-class>com.servlets.SaveLegalCustomerChangesServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SaveRealCustomerChangesServlet</servlet-name>
+        <servlet-class>com.servlets.SaveRealCustomerChangesServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -59,8 +67,16 @@
         <url-pattern>/UpdateLegalCustomerServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>UpdateRealCustomerServlet</servlet-name>
+        <url-pattern>/UpdateRealCustomerServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SaveLegalCustomerChangesServlet</servlet-name>
         <url-pattern>/SaveLegalCustomerChangesServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SaveRealCustomerChangesServlet</servlet-name>
+        <url-pattern>/SaveRealCustomerChangesServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

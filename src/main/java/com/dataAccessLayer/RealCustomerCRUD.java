@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class RealCustomerCRUD {
@@ -33,8 +34,8 @@ public class RealCustomerCRUD {
 
     static ArrayList<RealCustomer> retrieve(String customerNumber, String nationalCode, String firstName, String lastName, String fatherName, String dateOfBirth) {
         ArrayList<RealCustomer> realCustomers = new ArrayList<RealCustomer>();
-        try (PreparedStatement preparedStatement = SingletonConnection.getSingletonConnection()
-                .prepareStatement("SELECT * From legal_customer WHERE customer_number=?;");) {
+        //generatePreparedStatement("custoemrnumber","1425630","aaa","","سسس");
+        try (PreparedStatement preparedStatement = generatePreparedStatement(customerNumber,nationalCode,firstName,lastName,fatherName);) {
             ResultSet results = preparedStatement.executeQuery();
             while (results.next()) {
                 RealCustomer realCustomer = new RealCustomer();
@@ -99,10 +100,43 @@ public class RealCustomerCRUD {
         }
     }
 
-    private static PreparedStatement generatePreparedStatement(String customerNumber, String nationalCode, String firstName, String lastName, String fatherName, String dateOfBirth) {
+    private static PreparedStatement generatePreparedStatement(String customerNumber, String nationalCode, String firstName, String lastName, String fatherName) {
         PreparedStatement preparedStatement = null;
-        StringBuilder sqlCommand = new StringBuilder("SELECT * From real_customer ");
-        int counter = 0;
+        StringBuilder sqlCommand = new StringBuilder("SELECT * From real_customer WHERE ");
+        int counter = 1;
+        List<String> parametrs = new ArrayList<String>();
+        if(customerNumber != "" && customerNumber != null) {
+            sqlCommand.append(" customer_number=? AND");
+            parametrs.add(customerNumber);
+        }
+        if(nationalCode != "") {
+            sqlCommand.append(" national_code=? AND");
+            parametrs.add(nationalCode);
+        }
+        if(firstName != "") {
+            sqlCommand.append(" first_name=? AND");
+            parametrs.add(firstName);
+        }
+        if(lastName != "") {
+            sqlCommand.append(" last_name=? AND");
+            parametrs.add(lastName);
+        }
+        if(fatherName != "") {
+            sqlCommand.append(" father_name=? AND");
+            parametrs.add(fatherName);
+        }
+        sqlCommand.append(" true");
+
+        try {
+            preparedStatement = SingletonConnection.getSingletonConnection().prepareStatement(sqlCommand.toString());
+            for (String parametr : parametrs){
+
+                preparedStatement.setString(counter++,parametr);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         return preparedStatement;
 
 

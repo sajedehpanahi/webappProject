@@ -6,6 +6,7 @@ import com.dataAccessLayer.CustomerCRUD;
 
 import com.dataAccessLayer.LegalCustomerCRUD;
 
+import com.dataAccessLayer.RealCustomerCRUD;
 import com.exceptions.*;
 
 import java.sql.SQLException;
@@ -61,5 +62,10 @@ public class CustomerLogic {
     public static void updateCustomer(int id, String companyName, String dateOfRegistration, String economicCode)
             throws SQLException, DataBaseConnectionException {
         LegalCustomerCRUD.update(id,companyName, dateOfRegistration, economicCode);
+    }
+
+    public static void updateCustomer(int id, String nationalCode, String firstName, String lastName, String fatherName, String dateOfBirth)
+            throws DataBaseConnectionException {
+        RealCustomerCRUD.update(id, nationalCode, firstName, lastName, fatherName, dateOfBirth);
     }
 }
